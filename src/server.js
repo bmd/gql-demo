@@ -25,8 +25,18 @@ const typeDefs = gql`
   }
 
   type Department {
-    dept_no: String
-    dept_name: String
+    id: String
+    name: String
+    manager: Employee
+  }
+
+  type Employee {
+    id: Int
+    firstName: String
+    lastName: String
+    gender: String
+    hireDate: Int
+    department: Department
   }
 
   # The "Query" type is special: it lists all of the available queries that
@@ -35,6 +45,8 @@ const typeDefs = gql`
   type Query {
     books: [Book]
     departments: [Department]
+    department(id: String!): Department
+    employees: [Employee]
   }
 `;
 
@@ -52,8 +64,22 @@ const books = [
 const resolvers = {
   Query: {
     books: () => books,
-    departments: async () => await conn.select().from('departments').orderBy('dept_no', 'asc')
+    departments: async () => await conn.select().from('departments').orderBy('dept_no', 'asc'),
+    department: async(_, { id }) => await conn.select().from('departments').where('dept_no', id).first(),
   },
+  Department: {
+    id: (obj) => obj.dept_no,
+    name: (obj) => obj.dept_name,
+    manager: async (obj) => {
+      const x = await conn.select()
+        .from('dept_manager')
+        .join('employees', 'employees.emp_no', 'dept_manager.emp_no')
+        .where(conn.raw('to_date >= NOW()'))
+        .andWhere('dept_no', obj.dept_no).first();
+      console.log(x)
+      return x
+    }
+  }
 };
 
 // The ApolloServer constructor requires two parameters: your schema
@@ -62,5 +88,5 @@ const server = new ApolloServer({ typeDefs, resolvers });
 
 // The `listen` method launches a web server.
 server.listen().then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
+  console.log(`🚀 Server ready at ${url}`);
 });
