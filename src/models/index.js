@@ -1,24 +1,20 @@
-import { Sequelize } from 'sequelize';
 import { ENV } from '../config/env.config';
+const Knex = require('knex');
+const { Model } = require('objection');
 
-console.log("HERE")
-
-export const sequelize = new Sequelize({
-        host: ENV.DB_HOST,
-        database: ENV.DB_NAME,
-        port: ENV.DB_PORT,
-        dialect: ENV.DB_DIALECT,
-        username: ENV.DB_USER,
-        password: ENV.DB_PASSWORD,
-        operatorsAliases: false,
-        logging: true,
-        storage: ':memory:',
-        modelPaths: [__dirname + '/*.model.js'],
-        modelMatch: (filename, member) => {
-           return filename.substring(0, filename.indexOf('.model')) === member.toLowerCase();
-        },
+// Initialize knex.
+export const knex = Knex({
+  client: 'mysql',
+  useNullAsDefault: true,
+  connection: {
+    host: ENV.DB_HOST,
+    database: ENV.DB_NAME,
+    port: ENV.DB_PORT,
+    user: ENV.DB_USER,
+    password: ENV.DB_PASS,
+  }
 });
 
-console.log(sequelize)
+Model.knex(knex);
 
-export { Department } from './department.model';
+export { Department } from './department';
