@@ -1,14 +1,17 @@
 install:
 	npm install
 	docker pull genschsa/mysql-employees
+	chmod +x run_db.sh
 
 lint:
 	npx standard --fix
 
-start:
-	npm run transpile
-	npm run start
+start-db:
+	./run_db.sh
 
-watch:
+debug: lint start-db
 	npm run transpile
 	npm run start:watch
+
+start:
+	
