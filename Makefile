@@ -12,6 +12,3 @@ start-db:
 debug: lint start-db
 	npm run transpile
 	npm run start:watch
-
-start:
-	
