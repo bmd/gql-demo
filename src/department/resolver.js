@@ -1,4 +1,3 @@
-import { conn } from '../db'
 
 export const resolver = {
   Department: {
@@ -9,7 +8,7 @@ export const resolver = {
       return dataSources.employee.getEmployee(obj.emp_no)
     },
     employees: async (obj) => {
-      return conn.select() // TODO
+      return 'FOO' // TODO
     }
   },
   Query: {

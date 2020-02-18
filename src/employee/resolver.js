@@ -7,8 +7,6 @@ export const resolver = {
     firstName: (obj) => obj.first_name,
     lastName: (obj) => obj.last_name,
     hireDate: (obj) => sql2epoch(obj.hire_date),
-    title: (obj) => obj.title,
-    salary: (obj) => obj.salary,
     department: async (obj, _, { dataSources }) => {
       return dataSources.employee.getDepartment(obj.emp_no)
     }
