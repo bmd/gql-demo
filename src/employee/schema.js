@@ -7,11 +7,10 @@ export const typeDef = gql`
     firstName: String
     lastName: String
     gender: String
-    hireDate: Int
-    birthDate: Int
-    department: Department
     title: String
     salary: Int
+    hireDate: Int
+    department: Department
   }
 
   extend type Query {
