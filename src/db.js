@@ -1,7 +1,6 @@
 import { ENV } from './config'
-import knex from 'knex'
 
-export const conn = knex({
+export const knexConfig = {
   client: 'mysql',
   useNullAsDefault: true,
   connection: {
@@ -11,4 +10,4 @@ export const conn = knex({
     user: ENV.DB_USER,
     password: ENV.DB_PASS
   }
-})
+}

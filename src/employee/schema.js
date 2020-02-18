@@ -1,15 +1,9 @@
 import { gql } from 'apollo-server'
 
-export const typeDefs = gql`
-  type Department {
-    id: String
-    name: String
-    manager: Employee
-    employees: [Employee]
-  }
-
+export const typeDef = gql`
   type Employee {
-    id: Int
+    id: String
+    employeeId: Int
     firstName: String
     lastName: String
     gender: String
@@ -17,12 +11,10 @@ export const typeDefs = gql`
     birthDate: Int
     department: Department
     title: String
-    currentSalary: Int
+    salary: Int
   }
 
-  type Query {
-    departments: [Department]
-    department(id: String!): Department
+  extend type Query {
     employees(limit: Int!, offset: Int!): [Employee]
     employee(id: Int!): Employee
   }
