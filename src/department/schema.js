@@ -6,11 +6,11 @@ export const typeDefs = gql`
     departmentId: String
     name: String
     manager: Employee
-    employees: [Employee]
+    employees(limit: Int, offset: Int): [Employee]
   }
 
   extend type Query {
-    departments(limit: Int!, offset: Int!): [Department]
+    departments(limit: Int, offset: Int): [Department]
     department(id: String!): Department
   }
 `
