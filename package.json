@@ -2,36 +2,35 @@
   "name": "gql-demo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./src/server.js",
   "scripts": {
-    "start": "node ./dist/server.js",
-    "start:watch": "nodemon --exec babel-node ./dist/server.js",
-    "db:migrate": "node_modules/.bin/sequelize db:migrate",
-    "build": "tsc",
-    "transpile": "babel ./src --out-dir dist"
+    "start": "node 'dist/server.js'",
+    "start:dev": "nodemon 'src/server.ts' --exec 'ts-node' src/server.ts -e ts,graphql"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.8.4",
-    "@babel/node": "^7.8.4",
-    "@babel/preset-env": "^7.8.4",
+    "@types/node": "^13.7.4",
     "apollo-server": "^2.10.1",
-    "dataloader": "^2.0.0",
     "datasource-sql": "^1.1.1",
     "express": "^4.17.1",
-    "express-graphql": "^0.9.0",
     "graphql": "^14.6.0",
     "knex": "^0.20.10",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "mysql": "^2.18.1",
-    "nodemon": "^2.0.2",
-    "objection": "^2.1.2",
-    "sequelize": "^5.21.4"
+    "objection": "^2.1.2"
   },
   "devDependencies": {
-    "standard": "^14.3.1"
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/node": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "nodemon": "^2.0.2",
+    "source-map-loader": "^0.2.4",
+    "standard": "^14.3.1",
+    "ts-loader": "^6.2.1",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.8.2"
   }
 }

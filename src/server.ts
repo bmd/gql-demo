@@ -25,7 +25,7 @@ const server = new ApolloServer({
   resolvers: merge({}, EmployeeResolver, DepartmentResolver),
   dataSources: () => ({
     employee: new EmployeeDataSource(knexConfig),
-    department: new DepartmentDataSource(knexConfig)
+    department: new DepartmentDataSource(knexConfig),
   })
 })
 

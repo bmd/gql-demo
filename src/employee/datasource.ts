@@ -1,7 +1,8 @@
 import { SQLDataSource } from 'datasource-sql'
 
 export class EmployeeDataSource extends SQLDataSource {
-  async getEmployee (id) {
+
+  async getEmployee (id: number) {
     return this.knex.select('*')
       .from('v_full_employees')
       .join('titles', 'v_full_employees.emp_no', '=', 'titles.emp_no')
@@ -12,7 +13,7 @@ export class EmployeeDataSource extends SQLDataSource {
       .first()
   }
 
-  async getPage (limit, offset) {
+  async getPage (limit: number, offset: number) {
     return this.knex.select('*')
       .from('v_full_employees')
       .join('titles', 'v_full_employees.emp_no', '=', 'titles.emp_no')
@@ -23,7 +24,7 @@ export class EmployeeDataSource extends SQLDataSource {
       .offset(offset)
   }
 
-  async getDepartment (id) {
+  async getDepartment (id: number) {
     return this.knex.select()
       .from('departments')
       .join('current_dept_emp', 'departments.dept_no', 'current_dept_emp.dept_no')
